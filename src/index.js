@@ -5,7 +5,7 @@ import getScaleFlag from "./lib/get-scale-flag.js";
 
 function render() {
   const inputFilename = inputFilenameEl.value.trim() || "input.mp4";
-  const outputFilename = outputFilenameEl.value.trim() || "output.gif";
+  const outputFilename = outputFilenameEl.value.trim() || "output.mp4";
 
   const hasVideo = !disableVideoEl.checked;
   const hasAudio = !disableAudioEl.checked;
