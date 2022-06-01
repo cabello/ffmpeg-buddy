@@ -39,6 +39,7 @@ function render() {
     ...(hasAudio ? [] : ["-an"]),
     ...(startAt ? [`-ss '${startAt}'`] : []),
     ...(endAt ? [`-to '${endAt}'`] : []),
+    "-c:v copy -c:a copy",
     quoteFilename(outputFilename),
   ].join(" ");
 
