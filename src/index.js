@@ -33,11 +33,11 @@ function render() {
 
   outputEl.innerText = [
     "ffmpeg",
+    ...(startAt ? [`-ss '${startAt}'`] : []),
     "-i",
     quoteFilename(inputFilename),
     ...videoFlags,
     ...(hasAudio ? [] : ["-an"]),
-    ...(startAt ? [`-ss '${startAt}'`] : []),
     ...(endAt ? [`-to '${endAt}'`] : []),
     "-c:v copy -c:a copy",
     quoteFilename(outputFilename),
