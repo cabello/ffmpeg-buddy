@@ -5,7 +5,7 @@ import getScaleFlag from "./lib/get-scale-flag.js";
 
 function render() {
   const inputFilename = inputFilenameEl.value.trim() || "input.mp4";
-  const outputFilename = outputFilenameEl.value.trim() || "output.gif";
+  const outputFilename = outputFilenameEl.value.trim() || "output.mp4";
 
   const hasVideo = !disableVideoEl.checked;
   const hasAudio = !disableAudioEl.checked;
@@ -21,7 +21,8 @@ function render() {
     if (framerate) {
       videoFlags.push(`-r ${framerate}`);
     }
-    if (rotation !== "no rotation") { videoFlags.push(rotation);
+    if (rotation !== "no rotation") {
+      videoFlags.push(rotation);
     }
   } else {
     videoFlags.push("-vn");
@@ -32,12 +33,13 @@ function render() {
 
   outputEl.innerText = [
     "ffmpeg",
+    ...(startAt ? [`-ss '${startAt}'`] : []),
     "-i",
     quoteFilename(inputFilename),
     ...videoFlags,
     ...(hasAudio ? [] : ["-an"]),
-    ...(startAt ? [`-ss '${startAt}'`] : []),
     ...(endAt ? [`-to '${endAt}'`] : []),
+    "-c:v copy -c:a copy",
     quoteFilename(outputFilename),
   ].join(" ");
 
